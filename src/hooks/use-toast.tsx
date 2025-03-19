@@ -1,7 +1,7 @@
-import { toast } from "sonner";
-import { CheckCircle, AlertTriangle, XCircle } from "lucide-react";
+import { toast } from "sonner"
+import { CheckCircle, AlertTriangle, XCircle } from "lucide-react"
 
-type ToastType = "success" | "warning" | "error";
+type ToastType = "success" | "warning" | "error"
 
 export const useToast = () => {
   const showToast = (message: string, type: ToastType = "success") => {
@@ -18,14 +18,14 @@ export const useToast = () => {
         icon: <XCircle className="text-white w-5 h-5" />,
         style: { backgroundColor: "#ef4444", color: "white", fontWeight: "bold", borderRadius: "0.5rem" },
       },
-    };
+    }
 
     toast(message, {
       icon: config[type].icon,
       style: config[type].style,
       duration: 3000,
-    });
-  };
+    })
+  }
 
-  return { showToast };
+  return { showToast }
 };

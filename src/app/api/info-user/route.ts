@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
 
   } catch (error) {
     console.error("[GET_INFO_USER]", error)
-    return new NextResponse("Error fetching info user", { status: 500 })
+    return NextResponse.json({ message: "Error obteniendo información del usuario" }, { status: 500 })
   }
 }
