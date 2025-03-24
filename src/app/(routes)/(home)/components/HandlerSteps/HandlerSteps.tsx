@@ -34,45 +34,48 @@ export function HandlerSteps(props: HandlerStepProps) {
   }, [step, totalStep]);
 
   return (
-    <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {step > 1 && step <= totalStep && (
-              <Button
-                variant="outline"
-                className="mr-2"
-                onClick={prevStep}
-              >
-                Anterior <ArrowLeft />
-              </Button>
-            )}
-            <div className="mb-2 text-center">
-              Paso {step} de {totalStep}
-            </div>
-            <Progress value={progressValue} className="w-full" />
-          </AlertDialogTitle>
-          <AlertDialogDescription asChild>
-            <div>
-              {step === 1 && (
-                <StepOne />
+    <>
+      {/* Modal para mostrar los pasos de configuración */}
+      <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {step > 1 && step <= totalStep && (
+                <Button
+                  variant="outline"
+                  className="mr-2"
+                  onClick={prevStep}
+                >
+                  Anterior <ArrowLeft />
+                </Button>
               )}
-              {step === 2 && (
-                <StepTwo />
-              )}
-              {step === 3 && (
-                <StepThree />
-              )}
-              {step === 4 && (
-                <StepFour />
-              )}
-              {step === 5 && (
-                <Summary />
-              )}
-            </div>
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
+              <div className="mb-2 text-center">
+                Paso {step} de {totalStep}
+              </div>
+              <Progress value={progressValue} className="w-full" />
+            </AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                {step === 1 && (
+                  <StepOne />
+                )}
+                {step === 2 && (
+                  <StepTwo />
+                )}
+                {step === 3 && (
+                  <StepThree />
+                )}
+                {step === 4 && (
+                  <StepFour />
+                )}
+                {step === 5 && (
+                  <Summary />
+                )}
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  )
 }

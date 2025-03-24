@@ -22,6 +22,9 @@ export default function StepFour() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(infoUser.platforms);
+  
+
   // Función para manejar la selección de una imagen de perfil
   const handleAvatarSelect = (src: string) => {
     setSelectedAvatar(src)

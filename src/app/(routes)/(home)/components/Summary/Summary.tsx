@@ -11,11 +11,12 @@ export default function Summary() {
   return (
     <div>
       <h2 className="text-center font-semibold text-2xl">
-        Tu linkTree clone esta listo
+        Tu linktree-Clone esta listo
       </h2>
       <p className="text-center">Es hora de compartir con el mundo.</p>
 
       <div className="relative">
+        {/* Avatar */}
         <div className="flex justify-center mt-4">
           <Image
             src={avatarUrl}
@@ -26,9 +27,10 @@ export default function Summary() {
           />
         </div>
         <div>
+          {/* Información del perfil */}
           <div className="text-center space-y-2">
             <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
-            <p className="text-gray-500">@{userName}</p>
+            <p className="text-gray-500">{userName}</p>
             <p className="text-gray-400">{typeUser}</p>
             <div className="space-y-3 mt-4">
               {
@@ -48,13 +50,14 @@ export default function Summary() {
               }
             </div>
           </div>
+          {/* Confetti al finalizar el formulario */}
           <Confetti />
           <div className="mt-4">
             <Button 
               className="w-full bg-indigo-600 cursor-pointer"
               onClick={() => nextStep()}
             >
-              Continuar al perfil
+              Ir al perfil
             </Button>
           </div>
         </div>

@@ -19,6 +19,8 @@ export async function GET(req: NextRequest) {
         links: true,
       },
     })
+
+    // Si el usuario no existe
     if (!user) {
       user = await db.user.create({
         data: {

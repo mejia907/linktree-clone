@@ -10,6 +10,8 @@ import { StepConfigUserProvider } from "@/contexts/StepConfigUser/StepConfigUser
 import { HandlerSteps } from "./components/HandlerSteps/HandlerSteps";
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
 import { UserProvider } from "@/contexts/UserContext/UserContext";
+import ProfilePreview from "./components/ProfilePreviw/ProfilePreview";
+import ListSocialNetworks from "./components/ListSocialNetworks/ListSocialNetworks";
 
 export default function HomePage() {
 
@@ -54,19 +56,22 @@ export default function HomePage() {
 
           <ProfileInfo onReload={setReload} />
 
-          <div className="mt-20 flex flex-col items-center">
-            <div className="py-10 text-center justify-center flex flex-col items-center text-gray-400 font-semibold">
-              <TreePalm className="h-20 w-20" strokeWidth={1} />
-              <p>Muéstrale al mundo quién eres</p>
-              <p>Añade un enlace para comenzar</p>
-            </div>
+          {
+            infoUser.links.length > 0 ? (
+              <ListSocialNetworks links={infoUser.links} onReload={setReload} />
+            ) : (
 
-          </div>
+              <div className="mt-20 flex flex-col items-center">
+                <div className="py-10 text-center justify-center flex flex-col items-center text-gray-400 font-semibold">
+                  <TreePalm className="h-20 w-20" strokeWidth={1} />
+                  <p>Muéstrale al mundo quién eres</p>
+                  <p>Añade un enlace para comenzar</p>
+                </div>
 
+              </div>
+            )}
         </div>
-        <div>
-          <p>Profile preview</p>
-        </div>
+        <ProfilePreview />
       </div>
     </UserProvider>
   )

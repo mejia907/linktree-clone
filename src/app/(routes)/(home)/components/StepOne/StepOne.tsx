@@ -1,52 +1,60 @@
-import { Button } from "@/components/ui/button";
-import { dataCreator } from "./StepOne.data";
-import { useStepConfig } from "@/hooks/useStepConfig";
+import { Button } from "@/components/ui/button"
+import { dataCreator } from "./StepOne.data"
+import { useStepConfig } from "@/hooks/useStepConfig"
 
 export default function StepOne() {
 
-  // Acceder al estado global
+  // Acceder al estado global del usuario
   const { infoUser, setInfoUser, nextStep } = useStepConfig()
 
-  // Función para manejar cambios en los checkboxes del tipo de usuario
+  // Función para manejar cambios en el radio de tipo de usuario
   const handleClick = (value: string) => {
-    setInfoUser((prev) => ({ ...prev, typeUser: value }));
-  }
+    setInfoUser((prev) => ({ ...prev, typeUser: value }))
+  };
 
   return (
     <div>
-      <h2 className="text-center font-semibold text-2xl">
-        Cuéntanos sobre ti
-      </h2>
-      <p className="text-center">Esto nos ayuda a persnalizar tu experiencia. </p>
-      <div className="grid grid-cols-1 gap-2 mt-4">
-        {
-          dataCreator.map((item) => (
-            <div key={item.value} className="flex items-center gap-2">
+      <h2 className="text-center font-semibold text-2xl">Cuéntanos sobre ti</h2>
+      <p className="text-center">Esto nos ayuda a personalizar tu experiencia.</p>
+
+      <div className="grid grid-cols-1 gap-4 mt-4">
+        {dataCreator.map((item) => {
+          const isSelected = infoUser?.typeUser === item.value;
+
+          return (
+            <label
+              key={item.value}
+              htmlFor={`radio-${item.value}`}
+              className={`flex flex-col items-start gap-1 cursor-pointer p-3 rounded-lg transition-all duration-300 w-full border text-gray-800 
+                ${isSelected ? " border-indigo-600 border-2" : "bg-white  border-gray-300"}
+              `}
+              onClick={() => handleClick(item.value)}
+            >
               <input
-                id={item.value}
+                id={`radio-${item.value}`}
                 type="radio"
                 name="typeUser"
                 value={item.value}
-                className="peer"
-                checked={infoUser?.typeUser === item.value}
-                onChange={() => handleClick(item.value)}
+                className="hidden"
+                checked={isSelected}
+                readOnly // Evita advertencias en React
               />
-              <label htmlFor={item.value} className="cursor-pointer peer-checked:bg-indigo-600 peer-checked:text-white px-3 py-2 rounded-full">
-                {item.title}
-              </label>
-            </div>
-          ))
-        }
+              <span className="font-semibold">{item.title}</span>
+              <p className="text-xs text-gray-600">{item.description}</p>
+            </label>
+          );
+        })}
       </div>
+
       <div className="mt-4">
         <Button
-          className="w-full bg-indigo-600 cursor-pointer"
+          className="w-full bg-indigo-600 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed text-white p-2 rounded-lg"
           onClick={nextStep}
           disabled={!infoUser?.typeUser}
         >
-          <span className="text-white">Continuar</span>
+          Continuar
         </Button>
       </div>
     </div>
-  );
+  )
 }

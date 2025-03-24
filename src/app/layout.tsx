@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clone Linktree",
-  description: "Clone Linktree",
+  title: "Linktree-Clone",
+  description: "Linktree-Clone",
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <main className="w-full bg[#F3F3F1] h-full min-h-screen">{children}</main>
+          <main className="w-full bg-[#F3F3F1] h-full min-h-screen">{children}</main>
           <Toaster />
         </body>
       </html>

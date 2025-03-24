@@ -14,17 +14,18 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String?  @unique
-  name       String?
-  bio        String?
-  username   String?  @unique
-  avatarUrl  String?
-  firstLogin Boolean  @default(true)
-  typeUser   String?  @db.Text
-  links      Link[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id              String   @id @default(uuid())
+  email           String?  @unique
+  name            String?
+  bio             String?
+  username        String?  @unique
+  avatarUrl       String?
+  firstLogin      Boolean  @default(true)
+  typeUser        String?  @db.Text
+  backgroundImage String?
+  links           Link[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Link {
