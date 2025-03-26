@@ -22,16 +22,14 @@ export default function StepFour() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(infoUser.platforms);
-  
 
-  // Función para manejar la selección de una imagen de perfil
+  {/* Función para seleccionar una imagen de perfil */}
   const handleAvatarSelect = (src: string) => {
     setSelectedAvatar(src)
     setInfoUser((prev) => ({ ...prev, avatarUrl: src }))
   };
 
-  // Función para continuar al siguiente paso
+  {/* Función para continuar al siguiente paso */}
   const handleContinue = async () => {
     if (!name.trim() || !userName.trim()) {
       showToast('Todos los campos son obligatorios', 'error')
@@ -45,14 +43,14 @@ export default function StepFour() {
 
     setIsLoading(true);
 
-    // Actualizar los datos en el estado
+    {/* Actualizar los datos del usuario */}
     setInfoUser((prev) => ({
       ...prev,
       name,
       userName,
     }))
 
-    // Enviar los datos al servidor
+    {/* Enviar los datos al backend */}
     try {
       const response = await axios.post("/api/user", {
         name,
@@ -66,7 +64,7 @@ export default function StepFour() {
         nextStep();
       }
     } catch (error: any) {
-      showToast(error.response?.data?.message || "Ocurrió un error", "error");
+      showToast(error.response?.data?.message || "Error al crear el usuario", "error");
     } finally {
       setIsLoading(false);
     }
@@ -154,7 +152,7 @@ export default function StepFour() {
 
       <div className="mt-6 flex justify-center">
         <Button
-          className="w-full bg-indigo-600 cursor-pointer"
+          className="w-full bg-indigo-600 hover:bg-indigo-800 cursor-pointer"
           onClick={handleContinue}
           disabled={!name.trim() || !userName.trim() || !selectedAvatar || isLoading}
         >

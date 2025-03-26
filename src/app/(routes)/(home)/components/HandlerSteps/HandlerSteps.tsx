@@ -22,10 +22,10 @@ export function HandlerSteps(props: HandlerStepProps) {
   const [openDialog, setOpenDialog] = useState(true);
   const { totalStep, step, setStep, nextStep, prevStep } = useStepConfig();
 
-  // Calcular el porcentaje de avance
+  {/* Calcula el porcentaje de avance del paso actual */}
   const progressValue = totalStep > 0 ? (step / totalStep) * 100 : 0;
 
-  // cerrar dialog cuando se llega al ultimo paso
+  {/* Si el paso actual es mayor que el total de pasos, se recarga la pagina y se cierra el modal */}
   useEffect(() => {
     if (step > totalStep) {
       onReload((prev) => !prev);

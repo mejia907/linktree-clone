@@ -64,7 +64,7 @@ export default function FormNameAndUsername(props: FormNameAndUsernameProps) {
 
   return (
     <div>
-      {/* Formulario */}
+      {/* Formulario para editar el nombre, username y biografia  */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField

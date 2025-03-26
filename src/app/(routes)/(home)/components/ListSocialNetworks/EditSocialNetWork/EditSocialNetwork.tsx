@@ -37,7 +37,7 @@ export default function EditSocialNetwork(props: EditSocialNetworkProps) {
 
   const [showDialog, setShowDialog] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,7 +45,7 @@ export default function EditSocialNetwork(props: EditSocialNetworkProps) {
     },
   })
 
-  {/* Función para actualizar los datos del link */}
+  {/* Función para actualizar los datos del link */ }
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
 
     if (!values.link) {
@@ -61,11 +61,12 @@ export default function EditSocialNetwork(props: EditSocialNetworkProps) {
       reloadUser()
       onReload(true)
       showToast("Enlace actualizado con éxito", "success")
+      form.reset()
     } catch (error: any) {
       showToast(error.response?.data?.message || "Ocurrió un error", "error")
     } finally {
-      setIsLoading(false);
-      setShowDialog(false);
+      setIsLoading(false)
+      setShowDialog(false)
     }
 
   }
@@ -81,38 +82,40 @@ export default function EditSocialNetwork(props: EditSocialNetworkProps) {
         <DialogHeader>
           <DialogTitle>Editar</DialogTitle>
           {/* Formulario para editar el link */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="link"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Link</FormLabel>
-                    <FormControl>
-                      <Input placeholder="https://linktree-clone.com/linktree" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      Ejemplo : https://linktree-clone.com/linktree
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Botón para guardar los cambios */}
-              <Button
-                className="w-full bg-indigo-600 text-white rounded-full py-5 text-lg hover:bg-indigo-800 cursor-pointer"
-                type="submit"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <Loader2 className="h-5 w-5 animate-spin text-white" />
-                ) : (
-                  <span className="text-white">Guardar</span>
-                )}
-              </Button>
-            </form>
-          </Form>
+          <div className="grid gap-4 py-4">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="link"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Link</FormLabel>
+                      <FormControl>
+                        <Input placeholder="https://linktree-clone.com/linktree" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Ejemplo : https://linktree-clone.com/linktree
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Botón para guardar los cambios */}
+                <Button
+                  className="w-full bg-indigo-600 text-white rounded-full py-5 text-lg hover:bg-indigo-800 cursor-pointer"
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-white" />
+                  ) : (
+                    <span className="text-white">Guardar</span>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </div>
         </DialogHeader>
       </DialogContent>
     </Dialog>

@@ -42,9 +42,8 @@ export default function EditBackground({ onReload }: EditBackgroundProps) {
       setPhotoUrl(null);
       setShowDialog(false);
       onReload(true);
-    } catch (error) {
-      console.error("Error al actualizar la imagen:", error)
-      showToast("Error al actualizar la imagen", "error")
+    } catch (error: any) {
+      showToast(error.response?.data?.message || "Error al actualizar la imagen", "error")
     }
   };
 
@@ -90,7 +89,6 @@ export default function EditBackground({ onReload }: EditBackgroundProps) {
                   }
                 }}
                 onUploadError={(error: Error) => {
-                  console.error("Error al subir la imagen:", error);
                   showToast("Error al subir la imagen", "error");
                 }}
               />

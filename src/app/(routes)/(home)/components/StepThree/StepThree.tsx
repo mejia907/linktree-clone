@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useStepConfig } from "@/hooks/useStepConfig";
@@ -6,27 +5,27 @@ import Image from "next/image";
 
 export default function StepThree() {
 
-  // Acceder al estado global
+  {/* Acceder al estado global */}
   const { infoUser, setInfoUser, nextStep } = useStepConfig()
 
-  // Función para validar una URL
+  {/* Función para validar la URL */}
   const isValidUrl = (url: string) => {
     const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
     return urlPattern.test(url)
   }
 
-  // Función para manejar cambios en los inputs
+  {/* Función para manejar cambios en el enlace */}
   const handleInputChange = (index: number, value: string) => {
     const updatedPlatforms = [...infoUser.platforms];
     updatedPlatforms[index].link = value;
 
-    // Validar la URL
+    {/* Validar la URL */}
     let error = "";
     if (value.trim() !== "" && !isValidUrl(value)) {
       error = "Ingresa una URL válida";
     }
 
-    // Guardar el mensaje de error en el estado global
+    {/* Actualizar el error */}
     updatedPlatforms[index].error = error;
 
     setInfoUser((prev) => ({ ...prev, platforms: updatedPlatforms }));
@@ -42,7 +41,7 @@ export default function StepThree() {
     nextStep()
   }
 
-  // Verifica si todos los campos están completos
+  {/* Verificar si todos los enlaces son válidos */}
   const allLinksValid = infoUser.platforms.every(
     (platform) =>
       platform.link.trim() !== "" && !platform.error

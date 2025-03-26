@@ -1,31 +1,31 @@
-import { useState } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useStepConfig } from "@/hooks/useStepConfig";
-import { StepTwoData } from "./StepTwo.data";
+import { useState } from "react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { useStepConfig } from "@/hooks/useStepConfig"
+import { linksSocialNetwork } from "@/data/linksSocialNetwork"
 
 export default function StepTwo() {
 
-  // Acceder al estado global
+  {/* Acceder al estado global */}
   const { infoUser, setInfoUser, nextStep } = useStepConfig()
 
-  // Estado para almacenar las plataformas seleccionadas
+  {/* Estado para almacenar las plataformas seleccionadas */}
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(infoUser?.platforms.map(platform => platform.name) || []);
 
-  // Función para manejar cambios en los checkboxes de las plataformas
+  {/* Función para manejar la selección de plataformas */}
   const handlePlatformSelection = (platformName: string) => {
     if (selectedPlatforms.includes(platformName)) {
-      setSelectedPlatforms(selectedPlatforms.filter(platform => platform !== platformName));
+      setSelectedPlatforms(selectedPlatforms.filter(platform => platform !== platformName))
     } else {
-      setSelectedPlatforms([...selectedPlatforms, platformName]);
+      setSelectedPlatforms([...selectedPlatforms, platformName])
     }
   }
 
-  // Función para continuar al siguiente paso
+  {/* Función para continuar al siguiente paso */}
   const handleContinue = () => {
     setInfoUser((prev) => ({
       ...prev,
-      platforms: StepTwoData.filter(platform => selectedPlatforms.includes(platform.name))
+      platforms: linksSocialNetwork.filter(platform => selectedPlatforms.includes(platform.name))
     }))
     nextStep()
   }
@@ -36,7 +36,7 @@ export default function StepTwo() {
       <p className="text-center">Selecciona en los que tu estes</p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 mt-4">
         {
-          StepTwoData.map(({ icon, name, link }) => (
+          linksSocialNetwork.map(({ icon, name, link }) => (
             <div
               key={name}
               className={`flex flex-col gap-1 items-center rounded-lg py-3 hover:violet-300 transition-all duration-300 cursor-pointer ${selectedPlatforms.includes(name) ? "bg-violet-900 text-white" : "bg-slate-100 text-violet-900"}`}
@@ -58,5 +58,5 @@ export default function StepTwo() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

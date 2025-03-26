@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function LinkProfile() {
   const [isCopiedLink, setIsCopiedLink] = useState(false)
 
+  {/* Copiar enlace de perfil */}
   const copyLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/linktreeclone`)
     setIsCopiedLink(true)

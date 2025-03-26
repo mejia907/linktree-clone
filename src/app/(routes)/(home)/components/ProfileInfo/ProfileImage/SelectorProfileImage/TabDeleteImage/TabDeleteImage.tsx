@@ -13,6 +13,7 @@ export default function TabDeleteImage(props: TabDeleteImageProps) {
 
   const { confirm, DialogComponent } = useConfirm();
 
+  {/* Función para eliminar la imagen de perfil */ }
   const onDeleteImage = async () => {
     const confirmed = await confirm("¿Estás seguro de que quieres eliminar la imagen?");
 
@@ -25,10 +26,8 @@ export default function TabDeleteImage(props: TabDeleteImageProps) {
       setShowDialog(false)
       showToast("Imagen eliminada con éxito", "success")
       reloadUser()
-    } catch (error) {
-      // Si hay algún error en la actualización
-      console.error("Error al eliminar la imagen:", error)
-      showToast("Error al eliminar la imagen", "error")
+    } catch (error: any) {
+      showToast(error.response?.data?.message || "Error al eliminar la imagen", "error")
     }
   }
 

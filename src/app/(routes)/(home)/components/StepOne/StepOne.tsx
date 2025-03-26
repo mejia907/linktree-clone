@@ -4,10 +4,10 @@ import { useStepConfig } from "@/hooks/useStepConfig"
 
 export default function StepOne() {
 
-  // Acceder al estado global del usuario
+  {/* Acceder al estado global */}
   const { infoUser, setInfoUser, nextStep } = useStepConfig()
 
-  // Función para manejar cambios en el radio de tipo de usuario
+  {/* Función para manejar la selección de tipo de usuario */}
   const handleClick = (value: string) => {
     setInfoUser((prev) => ({ ...prev, typeUser: value }))
   };

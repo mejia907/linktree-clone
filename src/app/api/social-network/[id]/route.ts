@@ -20,7 +20,6 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     })
     return NextResponse.json(updatedLink, { status: 200 })
   } catch (error) {
-    console.error("Error al actualizar el link:", error)
     return NextResponse.json({ message: "Error al actualizar el link" }, { status: 500 })
   }
 }
@@ -40,7 +39,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     })
     return NextResponse.json(deletedLink, { status: 200 })
   } catch (error) {
-    console.error("Error al eliminar el link:", error)
     return NextResponse.json({ message: "Error al eliminar el link" }, { status: 500 })
   }
 }

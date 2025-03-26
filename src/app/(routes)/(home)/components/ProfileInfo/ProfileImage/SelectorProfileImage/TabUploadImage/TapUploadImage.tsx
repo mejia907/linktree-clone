@@ -16,6 +16,7 @@ export default function TabUploadImage(props: TabUploadImageProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { showToast } = useToast()
 
+  {/* Función para actualizar la imagen de perfil */}
   const onUploadPhoto = async () => {
 
     if (!photo) {
@@ -26,16 +27,12 @@ export default function TabUploadImage(props: TabUploadImageProps) {
     setIsLoading(true)
 
     try {
-      // Espera a que se actualice el avatar
       await axios.patch("/api/update-user", { avatarUrl: photo })
-
       setShowDialog(false)
       showToast("Imagen actualizada con éxito", "success")
       reloadUser()
-    } catch (error) {
-      // Si hay algún error en la actualización
-      console.error("Error al actualizar la imagen:", error)
-      showToast("Error al actualizar la imagen", "error")
+    } catch (error: any) {
+      showToast(error.response?.data?.message ||"Error al actualizar la imagen", "error")
     } finally {
       setIsLoading(false)
     }
@@ -54,19 +51,18 @@ export default function TabUploadImage(props: TabUploadImageProps) {
           className="rounded-md text-slate-800 bg-slate-300 h-full w-full p-4"
           endpoint="profileImage"
           onClientUploadComplete={(res) => {
-            setPhoto(res[0].url) // Aquí se obtiene la URL de la foto subida
+            setPhoto(res[0].url)
             setIsLoading(false) 
           }}
           onUploadError={(error) => {
-            console.log("Error al subir la imagen:", error)
-            showToast("Error al subir la imagen", "error")
+            showToast(error.message || "Error al subir la imagen", "error")
             setIsLoading(false) 
           }}
         />
       </div>
       <div>
         <Button
-          className="w-full    cursor-pointer"
+          className="w-full cursor-pointer"
           disabled={isLoading} 
           onClick={onUploadPhoto}
         >

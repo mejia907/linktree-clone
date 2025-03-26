@@ -71,7 +71,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Usuario actualizado con éxito", data: updatedUser }, { status: 200 })
 
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Error en el servidor" }, { status: 500 })
+    return NextResponse.json({ message: "Error al actualizar el usuario" }, { status: 500 })
   }
 }

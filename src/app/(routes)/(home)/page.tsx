@@ -55,7 +55,8 @@ export default function HomePage() {
           <LinkProfile />
 
           <ProfileInfo onReload={setReload} />
-
+          
+          {/* Lista de redes sociales creadas */}
           {
             infoUser.links.length > 0 ? (
               <ListSocialNetworks links={infoUser.links} onReload={setReload} />

@@ -16,29 +16,28 @@ import { DeleteSocialNetworkProps } from "./DeleteSocialNetwork.types";
 import { useUserInfo } from "@/hooks/useUser";
 
 export default function DeleteSocialNetwork(props: DeleteSocialNetworkProps) {
-  
+
   const { link, onReload } = props
 
- const { reloadUser } = useUserInfo()
+  const { reloadUser } = useUserInfo()
   const { showToast } = useToast();
 
   const [showDialog, setShowDialog] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  {/* Función para eliminar el link */}
+  {/* Función para eliminar el link */ }
   const onDelete = async () => {
-    
+
     setLoading(true)
 
     try {
-      await axios.delete(`/api/social-networks/${link.id}`);
+      await axios.delete(`/api/social-network/${link.id}`);
       showToast("Enlace eliminado correctamente", "success");
       onReload(true);
       setShowDialog(false);
       reloadUser();
-    } catch (error) {
-      console.error("Error eliminando la red social:", error);
-      showToast("Error al eliminar la red social", "error");
+    } catch (error: any) {
+      showToast(error.response?.data?.message || "Error al eliminar la red social", "error");
     } finally {
       setLoading(false);
       setShowDialog(false);
