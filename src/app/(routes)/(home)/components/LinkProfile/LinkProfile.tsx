@@ -2,23 +2,27 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useUserInfo } from "@/hooks/useUser";
 
 export default function LinkProfile() {
+  
+  const { user, isLoading } = useUserInfo()
+
   const [isCopiedLink, setIsCopiedLink] = useState(false)
 
   {/* Copiar enlace de perfil */}
   const copyLink = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/linktreeclone`)
+    navigator.clipboard.writeText(`${window.location.origin}/${user?.username}`)
     setIsCopiedLink(true)
   }
   return (
     <>
       {/* Enlace de perfil */}
-      <div className="bg-indigo-100 rounded-3xl">
+      <div className="bg-indigo-100 rounded-3xl mt-2">
         <div className="flex flex-col justify-center items-center text-center py-4 px-4 gap-2 md:flex-row md:justify-between md:text-left">
           <span className="text-sm">
             <span className="font-semibold">🔥 Tu linktree-Clone está activo: </span>
-            {window.location.origin}/@linktreeclone
+            {window.location.origin}/{user?.username}
           </span>
           <Button
             onClick={copyLink}

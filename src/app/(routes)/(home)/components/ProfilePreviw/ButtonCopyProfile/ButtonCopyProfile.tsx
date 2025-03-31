@@ -13,7 +13,7 @@ export default function ButtonCopyProfile() {
   {/* Función para copiar el perfil */}
   const copyProfile = () => {
     if (!user) return;
-    const profileUrl = `${window.location.origin}/@${user.username}`
+    const profileUrl = `${window.location.origin}/${user.username}`
     navigator.clipboard.writeText(profileUrl)
       .then(() => {
         setIsCopyProfile(true);

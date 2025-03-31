@@ -53,12 +53,12 @@ export default function EditBackground({ onReload }: EditBackgroundProps) {
       <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Ellipsis className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+            <Button variant="ghost" size="icon" className="cursor-pointer bg-gray-300 rounded-2xl hover:bg-gray-400">
+              <Ellipsis className="w-5 h-5 text-gray-800" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild className="cursor-pointer">
               <AlertDialogTrigger className="flex gap-2 items-center">
                 <ImagePlus className="h-4 w-4" />
                 Editar imagen de fondo

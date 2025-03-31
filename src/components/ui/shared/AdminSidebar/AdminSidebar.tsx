@@ -1,4 +1,4 @@
-import { ChevronUp, User2 } from "lucide-react";
+import { ChevronUp, Palmtree, User2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -21,7 +21,12 @@ import { items } from "./AdminSidebar.data";
 export default function AdminSidebar() {
   return (
     <Sidebar collapsible="icon" variant="sidebar" className="h-full">
-      <SidebarHeader />
+      <SidebarHeader className="bg-sidebar text-sidebar-foreground">
+        <div className="flex items-center gap-2 p-2">
+          <Palmtree />
+          <span className="font-semibold">Linktree-Clone</span>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>

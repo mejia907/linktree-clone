@@ -3,32 +3,32 @@ import { AlignVerticalSpaceAround, CalendarRange, ChartNoAxesColumnIncreasing, E
 // Menu items.
 export const items = [
   {
-    title: "Links",
-    url: "#",
+    title: "Mis enlaces",
+    url: "/",
     icon: AlignVerticalSpaceAround,
   },
   {
-    title: "Shop",
+    title: "Mi tienda",
     url: "#",
     icon: Store,
   },
   {
-    title: "Apparence",
+    title: "Apariencia",
     url: "#",
     icon: Eclipse,
   },
   {
-    title: "Social Planner",
+    title: "Planificación",
     url: "#",
     icon: CalendarRange,
   },
   {
-    title: "Analytics",
+    title: "Anlalitica",
     url: "#",
     icon: ChartNoAxesColumnIncreasing,
   },
   {
-    title: "Settings",
+    title: "Configuraciones",
     url: "#",
     icon: Settings,
   },
