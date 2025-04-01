@@ -48,7 +48,7 @@ export default function UserPage() {
       fetchUserInfo()
       setReload(false)
     }
-  }, [username, reload, router, showToast])
+  }, [username])
 
   if (isLoading) return <LoaderProfile />
 
