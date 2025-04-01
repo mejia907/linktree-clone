@@ -21,6 +21,6 @@ export async function PATCH(req: NextRequest) {
 
     return NextResponse.json(user);
   } catch (error) {
-    return NextResponse.json({ message: "Error al actualizar el usuario" }, { status: 500 });
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Error al actualizar el usuario" }, { status: 500 })
   }
 }

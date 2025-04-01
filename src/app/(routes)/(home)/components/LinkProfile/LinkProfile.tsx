@@ -6,7 +6,7 @@ import { useUserInfo } from "@/hooks/useUser";
 
 export default function LinkProfile() {
   
-  const { user, isLoading } = useUserInfo()
+  const { user } = useUserInfo()
 
   const [isCopiedLink, setIsCopiedLink] = useState(false)
 

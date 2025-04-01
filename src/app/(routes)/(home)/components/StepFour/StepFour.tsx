@@ -23,13 +23,13 @@ export default function StepFour() {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  {/* Función para seleccionar una imagen de perfil */}
+  {/* Función para seleccionar una imagen de perfil */ }
   const handleAvatarSelect = (src: string) => {
     setSelectedAvatar(src)
     setInfoUser((prev) => ({ ...prev, avatarUrl: src }))
   };
 
-  {/* Función para continuar al siguiente paso */}
+  {/* Función para continuar al siguiente paso */ }
   const handleContinue = async () => {
     if (!name.trim() || !userName.trim()) {
       showToast('Todos los campos son obligatorios', 'error')
@@ -43,14 +43,14 @@ export default function StepFour() {
 
     setIsLoading(true);
 
-    {/* Actualizar los datos del usuario */}
+    {/* Actualizar los datos del usuario */ }
     setInfoUser((prev) => ({
       ...prev,
       name,
       userName,
     }))
 
-    {/* Enviar los datos al backend */}
+    {/* Enviar los datos al backend */ }
     try {
       const response = await axios.post("/api/user", {
         name,
@@ -63,8 +63,14 @@ export default function StepFour() {
       if (response.status === 200) {
         nextStep();
       }
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Error al crear el usuario", "error");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al crear el usuario", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -118,8 +124,8 @@ export default function StepFour() {
                 setShowUploadAvatar(false);
               }
             }}
-            onUploadError={(error) => {
-              showToast("Error al subir la imagen", "error");
+            onUploadError={(error: Error) => {
+              showToast(`Error al subir la imagen de fondo: ${error.message}`, "error");
             }}
           />
         ) : (
@@ -156,8 +162,8 @@ export default function StepFour() {
           onClick={handleContinue}
           disabled={!name.trim() || !userName.trim() || !selectedAvatar || isLoading}
         >
-           {isLoading ? (
-            <Loader2 className="h-5 w-5 animate-spin text-white" /> 
+          {isLoading ? (
+            <Loader2 className="h-5 w-5 animate-spin text-white" />
           ) : (
             <span className="text-white">Continuar</span>
           )}

@@ -39,6 +39,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(user)
 
   } catch (error) {
-    return NextResponse.json({ message: "Error obteniendo información del usuario" }, { status: 500 })
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Error obteniendo información del usuario" }, { status: 500 })
   }
 }

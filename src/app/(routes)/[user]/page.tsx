@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
 import { Link, User } from "@prisma/client";
 import { useToast } from "@/hooks/use-toast";
 import LoaderProfile from "@/components/ui/shared/LoaderProfile/LoaderProfile";
@@ -27,26 +28,27 @@ export default function UserPage() {
       setIsLoading(true)
 
       try {
-        const response = await fetch(`/api/info-user/${username}`)
-
-        if (!response.ok) throw new Error('Error al obtener la información del usuario')
-
-        const data = await response.json()
-
-        setInfoUser(data)
-      } catch (error: any) {
-        showToast(error.response?.data?.message || 'Error al obtener la información del usuario', 'error')
+        const { data } = await axios.get(`/api/info-user/${username}`);
+        setInfoUser(data);
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          showToast(error.response?.data?.message || "Ocurrió un error al obtener la información", "error");
+        } else if (error instanceof Error) {
+          showToast(error.message, "error");
+        } else {
+          showToast("Ocurrió un error inesperado", "error");
+        }
       } finally {
         setIsLoading(false)
       }
     }
 
     fetchUserInfo()
-    if (reload) {
+    if (reload && username) {
       fetchUserInfo()
       setReload(false)
     }
-  }, [username, reload, router])
+  }, [username, reload, router, showToast])
 
   if (isLoading) return <LoaderProfile />
 

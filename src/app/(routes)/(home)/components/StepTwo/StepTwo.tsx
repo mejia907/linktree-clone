@@ -36,7 +36,7 @@ export default function StepTwo() {
       <p className="text-center">Selecciona en los que tu estes</p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 mt-4">
         {
-          linksSocialNetwork.map(({ icon, name, link }) => (
+          linksSocialNetwork.map(({ icon, name }) => (
             <div
               key={name}
               className={`flex flex-col gap-1 items-center rounded-lg py-3 hover:violet-300 transition-all duration-300 cursor-pointer ${selectedPlatforms.includes(name) ? "bg-violet-900 text-white" : "bg-slate-100 text-violet-900"}`}

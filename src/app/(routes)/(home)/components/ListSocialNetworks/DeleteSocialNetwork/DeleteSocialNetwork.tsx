@@ -36,8 +36,14 @@ export default function DeleteSocialNetwork(props: DeleteSocialNetworkProps) {
       onReload(true);
       setShowDialog(false);
       reloadUser();
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Error al eliminar la red social", "error");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Error al eliminar la red social", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado al eliminar la red social", "error");
+      }
     } finally {
       setLoading(false);
       setShowDialog(false);

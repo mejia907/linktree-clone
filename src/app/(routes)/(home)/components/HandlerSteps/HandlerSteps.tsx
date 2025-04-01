@@ -20,7 +20,7 @@ import Summary from "../Summary/Summary";
 export function HandlerSteps(props: HandlerStepProps) {
   const { onReload } = props;
   const [openDialog, setOpenDialog] = useState(true);
-  const { totalStep, step, setStep, nextStep, prevStep } = useStepConfig();
+  const { totalStep, step, prevStep } = useStepConfig();
 
   {/* Calcula el porcentaje de avance del paso actual */}
   const progressValue = totalStep > 0 ? (step / totalStep) * 100 : 0;
@@ -31,7 +31,7 @@ export function HandlerSteps(props: HandlerStepProps) {
       onReload((prev) => !prev);
       setOpenDialog(false);
     }
-  }, [step, totalStep]);
+  }, [step, totalStep, onReload]);
 
   return (
     <>

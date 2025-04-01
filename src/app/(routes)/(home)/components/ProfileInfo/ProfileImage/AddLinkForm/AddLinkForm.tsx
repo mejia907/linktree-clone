@@ -38,7 +38,7 @@ export default function AddLinkForm(props: AddLinkFormProps) {
   const [showDialog, setShowDialog] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
 
-  {/* Configuración del formulario */}
+  {/* Configuración del formulario */ }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,7 +48,7 @@ export default function AddLinkForm(props: AddLinkFormProps) {
     },
   })
 
-  {/* Función para crear un nuevo link */}
+  {/* Función para crear un nuevo link */ }
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
 
     setIsLoading(true);
@@ -60,8 +60,14 @@ export default function AddLinkForm(props: AddLinkFormProps) {
       onReload(true)
       showToast("Enlace creado con éxito", "success")
       form.reset()
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Error al crear el enlace", "error");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al crear el enlace", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     } finally {
       setIsLoading(false)
       setShowDialog(false)
@@ -147,8 +153,8 @@ export default function AddLinkForm(props: AddLinkFormProps) {
                   />
 
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-indigo-600 hover:bg-indigo-800 rounded-full cursor-pointer"
                     disabled={isLoading}
                   >

@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = params
+    const { id } = await params
     const { link } = await req.json()
 
     if (!id || !link) {
@@ -20,13 +20,13 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     })
     return NextResponse.json(updatedLink, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Error al actualizar el link" }, { status: 500 })
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Error al actualizar el link" }, { status: 500 })
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = params
+    const { id } = await params
 
     if (!id) {
       return NextResponse.json({ message: "El id es obligatorio" }, { status: 400 })
@@ -39,6 +39,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     })
     return NextResponse.json(deletedLink, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Error al eliminar el link" }, { status: 500 })
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Error al eliminar el link" }, { status: 500 })
   }
 }

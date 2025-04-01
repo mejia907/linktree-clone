@@ -62,8 +62,14 @@ export default function EditSocialNetwork(props: EditSocialNetworkProps) {
       onReload(true)
       showToast("Enlace actualizado con éxito", "success")
       form.reset()
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Ocurrió un error", "error")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al actualizar el enlace", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     } finally {
       setIsLoading(false)
       setShowDialog(false)

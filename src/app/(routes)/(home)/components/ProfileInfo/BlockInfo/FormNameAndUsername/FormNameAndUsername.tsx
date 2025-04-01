@@ -32,7 +32,7 @@ export default function FormNameAndUsername(props: FormNameAndUsernameProps) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  {/* Configuración del formulario */}
+  {/* Configuración del formulario */ }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,7 +42,7 @@ export default function FormNameAndUsername(props: FormNameAndUsernameProps) {
     },
   })
 
-  {/* Función para actualizar los datos del usuario */}
+  {/* Función para actualizar los datos del usuario */ }
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
@@ -55,8 +55,14 @@ export default function FormNameAndUsername(props: FormNameAndUsernameProps) {
       reloadUser()
       showToast("Datos actualizados con éxito", "success")
       form.reset()
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Ocurrió un error", "error");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al actualizar", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +120,7 @@ export default function FormNameAndUsername(props: FormNameAndUsernameProps) {
             className="w-full bg-indigo-600 text-white rounded-full py-5 text-lg hover:bg-indigo-800 cursor-pointer"
             type="submit"
             disabled={isLoading}
-            >
+          >
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin text-white" />
             ) : (

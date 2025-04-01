@@ -42,10 +42,16 @@ export default function EditBackground({ onReload }: EditBackgroundProps) {
       setPhotoUrl(null);
       setShowDialog(false);
       onReload(true);
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Error al actualizar la imagen", "error")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al actualizar", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     }
-  };
+  }
 
   return (
     <div>
@@ -89,7 +95,7 @@ export default function EditBackground({ onReload }: EditBackgroundProps) {
                   }
                 }}
                 onUploadError={(error: Error) => {
-                  showToast("Error al subir la imagen", "error");
+                  showToast(`Error al subir la imagen de fondo: ${error.message}`, "error");
                 }}
               />
             )}

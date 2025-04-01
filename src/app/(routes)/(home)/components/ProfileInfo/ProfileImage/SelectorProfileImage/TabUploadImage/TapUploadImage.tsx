@@ -31,8 +31,14 @@ export default function TabUploadImage(props: TabUploadImageProps) {
       setShowDialog(false)
       showToast("Imagen actualizada con éxito", "success")
       reloadUser()
-    } catch (error: any) {
-      showToast(error.response?.data?.message ||"Error al actualizar la imagen", "error")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al actualizar", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     } finally {
       setIsLoading(false)
     }

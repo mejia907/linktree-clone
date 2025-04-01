@@ -1,9 +1,9 @@
-import { ChevronLeft, Trash2 } from "lucide-react";
-import { TabDeleteImageProps } from "./TabDeleteImage.types";
-import axios from "axios";
-import { useUserInfo } from "@/hooks/useUser";
-import { useConfirm } from "@/hooks/use-confirm";
-import { useToast } from "@/hooks/use-toast";
+import axios from "axios"
+import { ChevronLeft, Trash2 } from "lucide-react"
+import { TabDeleteImageProps } from "./TabDeleteImage.types"
+import { useUserInfo } from "@/hooks/useUser"
+import { useConfirm } from "@/hooks/use-confirm"
+import { useToast } from "@/hooks/use-toast"
 
 export default function TabDeleteImage(props: TabDeleteImageProps) {
 
@@ -26,8 +26,14 @@ export default function TabDeleteImage(props: TabDeleteImageProps) {
       setShowDialog(false)
       showToast("Imagen eliminada con éxito", "success")
       reloadUser()
-    } catch (error: any) {
-      showToast(error.response?.data?.message || "Error al eliminar la imagen", "error")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || "Ocurrió un error al eliminar", "error");
+      } else if (error instanceof Error) {
+        showToast(error.message, "error");
+      } else {
+        showToast("Ocurrió un error inesperado", "error");
+      }
     }
   }
 
@@ -56,5 +62,5 @@ export default function TabDeleteImage(props: TabDeleteImageProps) {
       </div>
       {DialogComponent}
     </div>
-  );
+  )
 }

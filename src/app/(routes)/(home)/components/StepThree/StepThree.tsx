@@ -33,7 +33,7 @@ export default function StepThree() {
 
   // Función para continuar al siguiente paso
   const handleContinue = () => {
-    const updatedPlatforms = infoUser.platforms.map((platform, index) => ({
+    const updatedPlatforms = infoUser.platforms.map((platform) => ({
       ...platform,
       link: platform.link || "",
     }))
