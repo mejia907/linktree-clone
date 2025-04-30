@@ -20,7 +20,7 @@ Un clon funcional de [Linktree](https://linktr.ee/) desarrollado con tecnología
 
 ## 📸 Capturas de pantalla
 
-> (Agrega aquí algunas imágenes o gifs del funcionamiento de la app si lo deseas)
+> <img src="https://www.andresmejia.dev/_astro/linktree_clone.Cpg1sl2g_Z2pmBxc.webp" width="80%">
 
 ## 📦 Instalación local
 
