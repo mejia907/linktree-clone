@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Neon-00E599?style=for-the-badge&logo=neon&logoColor=white" />
+  <img src="https://img.shields.io/badge/Clerk-F0F0F0?style=for-the-badge&logo=clerk&logoColor=black" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+</p>
+
 # 🌿 Linktree Clone
 
 Un clon funcional de [Linktree](https://linktr.ee/) desarrollado con tecnologías modernas como Next.js, Neon, Clerk y Tailwind CSS. Esta aplicación permite a los usuarios gestionar su perfil de enlaces personalizados, incluyendo la creación, edición, eliminación y compartición de enlaces, además de opciones para editar el perfil.
@@ -14,7 +21,7 @@ Un clon funcional de [Linktree](https://linktr.ee/) desarrollado con tecnología
 ## 🛠️ Tecnologías utilizadas
 
 - **Next.js** – Framework React para renderizado del lado del servidor y generación de sitios estáticos.
-- **Neon** – Base de datos PostgreSQL escalable en la nube.
+- **Neon (PostgreSQL serverless)** – Base de datos PostgreSQL escalable en la nube.
 - **Clerk** – Gestión de usuarios y autenticación.
 - **Tailwind CSS** – Framework CSS para estilos rápidos y personalizables.
 
